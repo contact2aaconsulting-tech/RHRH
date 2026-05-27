@@ -1,17 +1,822 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>RHRH Dashboard</title>
-</head>
+<!-- TALENTINTEL DASHBOARD - WordPress Compatible -->
+<!-- Coller dans un bloc HTML personnalisé -->
 
-<body style="font-family: Arial; text-align: center; margin-top: 60px;">
+<div id="ti-wrap">
+<style>
+#ti-wrap *{box-sizing:border-box;margin:0;padding:0;}
+#ti-wrap{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+#ti-wrap .ti-root{
+  --bg:#020617;--card:#0f172a;--card2:#1e293b;--brd:#1e293b;--brd2:#334155;
+  --tx:#f8fafc;--mt:#94a3b8;--ac:#6366f1;--ac2:#60a5fa;
+  --rose:#f43f5e;--grn:#10b981;--amb:#f59e0b;--vio:#8b5cf6;
+  background:var(--bg);color:var(--tx);display:flex;height:720px;
+  overflow:hidden;border-radius:16px;position:relative;
+}
 
-  <h1>🚀 RHRH Dashboard</h1>
+/* === SIDEBAR === */
+#ti-wrap .ti-sb{width:210px;background:rgba(15,23,42,0.98);border-right:1px solid var(--brd);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;}
+#ti-wrap .ti-logo{padding:18px 16px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px;}
+#ti-wrap .ti-logo-ico{width:32px;height:32px;background:linear-gradient(135deg,#6366f1,#60a5fa);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#ti-wrap .ti-logo-txt{font-size:13px;font-weight:700;letter-spacing:-0.3px;color:var(--tx);}
+#ti-wrap .ti-logo-txt span{color:#6366f1;}
+#ti-wrap nav.ti-nav{flex:1;padding:12px 10px;}
+#ti-wrap .ti-nav-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--mt);text-transform:uppercase;padding:8px 8px 5px;}
+#ti-wrap .ti-nav-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;cursor:pointer;color:var(--mt);font-size:13px;font-weight:500;transition:all 0.15s;margin-bottom:2px;position:relative;user-select:none;background:transparent;border:none;width:100%;text-align:left;}
+#ti-wrap .ti-nav-item:hover{background:rgba(99,102,241,0.08);color:var(--tx);}
+#ti-wrap .ti-nav-item.active{background:rgba(99,102,241,0.15);color:#818cf8;}
+#ti-wrap .ti-nav-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:2px;background:#6366f1;border-radius:0 2px 2px 0;}
+#ti-wrap .ti-nb{margin-left:auto;background:rgba(244,63,94,0.2);color:#f43f5e;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;border:1px solid rgba(244,63,94,0.25);}
+#ti-wrap .ti-sb-foot{padding:12px 10px;border-top:1px solid var(--brd);}
+#ti-wrap .ti-ucard{display:flex;align-items:center;gap:9px;padding:9px;border-radius:10px;background:rgba(30,41,59,0.5);cursor:pointer;}
+#ti-wrap .ti-avat{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#f43f5e);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;color:#fff;}
 
-  <p>Ton site GitHub est maintenant actif ✔️</p>
+/* === MAIN === */
+#ti-wrap .ti-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+#ti-wrap .ti-topbar{height:58px;background:rgba(2,6,23,0.9);border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px;padding:0 20px;flex-shrink:0;}
+#ti-wrap .ti-srch{flex:1;max-width:320px;position:relative;}
+#ti-wrap .ti-srch-ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--mt);}
+#ti-wrap .ti-srch-in{width:100%;background:rgba(30,41,59,0.7);border:1px solid var(--brd);border-radius:9px;padding:7px 12px 7px 32px;font-size:13px;color:var(--tx);outline:none;transition:all 0.2s;}
+#ti-wrap .ti-srch-in:focus{border-color:rgba(99,102,241,0.5);}
+#ti-wrap .ti-srch-in::placeholder{color:var(--mt);}
+#ti-wrap .ti-tb-acts{display:flex;gap:8px;margin-left:auto;align-items:center;}
+#ti-wrap .ti-ib{width:36px;height:36px;border-radius:9px;background:rgba(30,41,59,0.7);border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mt);position:relative;transition:all 0.15s;font-size:16px;}
+#ti-wrap .ti-ib:hover{background:var(--card2);color:var(--tx);}
+#ti-wrap .ti-pulse{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--rose);border-radius:50%;border:2px solid var(--bg);animation:ti-pulse 2s infinite;}
+@keyframes ti-pulse{0%,100%{box-shadow:0 0 0 0 rgba(244,63,94,0.4);}50%{box-shadow:0 0 0 4px rgba(244,63,94,0);}}
+#ti-wrap .ti-tavat{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#60a5fa);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;cursor:pointer;border:2px solid rgba(99,102,241,0.4);color:#fff;}
+#ti-wrap .ti-nb-cnt{position:absolute;top:-4px;right:-4px;background:var(--rose);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:20px;border:2px solid var(--bg);}
 
-  <p>Si tu vois ça, tout fonctionne correctement 👍</p>
+/* === CONTENT === */
+#ti-wrap .ti-content{flex:1;overflow-y:auto;padding:20px;}
+#ti-wrap .ti-page{display:none;animation:ti-up 0.3s ease both;}
+#ti-wrap .ti-page.active{display:block;}
+@keyframes ti-up{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+#ti-wrap .ti-pg-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
+#ti-wrap .ti-pg-title{font-size:20px;font-weight:700;letter-spacing:-0.5px;color:var(--tx);}
+#ti-wrap .ti-pg-sub{font-size:12px;color:var(--mt);margin-top:3px;}
 
-</body>
-</html>
+/* === BUTTONS === */
+#ti-wrap .ti-btn{background:linear-gradient(135deg,#6366f1,#4f46e5);border:none;color:white;padding:8px 16px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer;transition:transform 0.15s;}
+#ti-wrap .ti-btn:hover{transform:scale(1.03);}
+#ti-wrap .ti-btn-ghost{background:rgba(30,41,59,0.7);border:1px solid var(--brd2);color:var(--tx);padding:8px 16px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer;}
+
+/* === KPI === */
+#ti-wrap .ti-kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px;}
+#ti-wrap .ti-kpi{background:var(--card);border:1px solid var(--brd);border-radius:16px;padding:16px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;}
+#ti-wrap .ti-kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:16px 16px 0 0;}
+#ti-wrap .ti-kpi.ind::before{background:linear-gradient(90deg,#6366f1,#818cf8);}
+#ti-wrap .ti-kpi.blu::before{background:linear-gradient(90deg,#3b82f6,#60a5fa);}
+#ti-wrap .ti-kpi.grn::before{background:linear-gradient(90deg,#10b981,#34d399);}
+#ti-wrap .ti-kpi.vio::before{background:linear-gradient(90deg,#8b5cf6,#a78bfa);}
+#ti-wrap .ti-kpi.ros::before{background:linear-gradient(90deg,#f43f5e,#fb7185);}
+#ti-wrap .ti-kpi:hover{transform:translateY(-3px);border-color:var(--brd2);box-shadow:0 12px 30px rgba(0,0,0,0.3);}
+#ti-wrap .ti-kpi-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:12px;}
+#ti-wrap .ti-kpi.ind .ti-kpi-ico{background:rgba(99,102,241,0.15);color:#818cf8;}
+#ti-wrap .ti-kpi.blu .ti-kpi-ico{background:rgba(59,130,246,0.15);color:#60a5fa;}
+#ti-wrap .ti-kpi.grn .ti-kpi-ico{background:rgba(16,185,129,0.15);color:#34d399;}
+#ti-wrap .ti-kpi.vio .ti-kpi-ico{background:rgba(139,92,246,0.15);color:#a78bfa;}
+#ti-wrap .ti-kpi.ros .ti-kpi-ico{background:rgba(244,63,94,0.15);color:#fb7185;}
+#ti-wrap .ti-kpi-val{font-size:26px;font-weight:700;letter-spacing:-0.8px;margin-bottom:2px;color:var(--tx);}
+#ti-wrap .ti-kpi-lbl{font-size:11px;color:var(--mt);font-weight:500;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;}
+#ti-wrap .ti-kpi-tr{font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:4px;}
+#ti-wrap .ti-kpi-tr.up{color:var(--grn);}
+#ti-wrap .ti-kpi-tr.dn{color:var(--rose);}
+
+/* === CARDS === */
+#ti-wrap .ti-sec2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+#ti-wrap .ti-card{background:var(--card);border:1px solid var(--brd);border-radius:16px;padding:18px;transition:border-color 0.2s;}
+#ti-wrap .ti-card:hover{border-color:var(--brd2);}
+#ti-wrap .ti-card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+#ti-wrap .ti-card-title{font-size:14px;font-weight:600;letter-spacing:-0.2px;color:var(--tx);}
+#ti-wrap .ti-card-sub{font-size:11.5px;color:var(--mt);margin-top:2px;}
+#ti-wrap .ti-chart-w{position:relative;height:180px;}
+
+/* === BADGES === */
+#ti-wrap .ti-bdg{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:20px;}
+#ti-wrap .ti-bdg.ind{background:rgba(99,102,241,0.15);color:#818cf8;border:1px solid rgba(99,102,241,0.2);}
+#ti-wrap .ti-bdg.grn{background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.2);}
+#ti-wrap .ti-bdg.amb{background:rgba(245,158,11,0.15);color:#fbbf24;border:1px solid rgba(245,158,11,0.2);}
+#ti-wrap .ti-bdg.ros{background:rgba(244,63,94,0.15);color:#fb7185;border:1px solid rgba(244,63,94,0.2);}
+#ti-wrap .ti-bdg.blu{background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.2);}
+#ti-wrap .ti-bdg.vio{background:rgba(139,92,246,0.15);color:#a78bfa;border:1px solid rgba(139,92,246,0.2);}
+
+/* === TALENT CARDS === */
+#ti-wrap .ti-tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+#ti-wrap .ti-tcrd{background:var(--card);border:1px solid var(--brd);border-radius:16px;padding:16px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;}
+#ti-wrap .ti-tcrd:hover{transform:translateY(-4px);border-color:rgba(99,102,241,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.3);}
+#ti-wrap .ti-tavt2{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;position:relative;}
+#ti-wrap .ti-tavt2::after{content:'';position:absolute;bottom:0;right:0;width:11px;height:11px;background:var(--grn);border-radius:50%;border:2px solid var(--card);}
+#ti-wrap .ti-tname{font-size:13.5px;font-weight:600;margin-bottom:2px;color:var(--tx);}
+#ti-wrap .ti-trole{font-size:11.5px;color:var(--mt);margin-bottom:10px;}
+#ti-wrap .ti-stags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;}
+#ti-wrap .ti-stag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;background:rgba(30,41,59,0.9);color:var(--mt);border:1px solid var(--brd);}
+#ti-wrap .ti-mrow{display:flex;align-items:center;justify-content:space-between;font-size:11px;}
+#ti-wrap .ti-mscore{font-size:13px;font-weight:700;color:#34d399;}
+#ti-wrap .ti-mbar{height:4px;background:rgba(30,41,59,0.9);border-radius:4px;margin-top:5px;overflow:hidden;}
+#ti-wrap .ti-mfill{height:100%;border-radius:4px;background:linear-gradient(90deg,#6366f1,#10b981);transition:width 1.2s cubic-bezier(0.4,0,0.2,1);width:0;}
+
+/* === TABLE === */
+#ti-wrap .ti-twrap{overflow-x:auto;border-radius:10px;}
+#ti-wrap table.ti-tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
+#ti-wrap .ti-tbl th{padding:10px 14px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--mt);border-bottom:1px solid var(--brd);background:rgba(15,23,42,0.4);}
+#ti-wrap .ti-tbl td{padding:12px 14px;border-bottom:1px solid rgba(30,41,59,0.4);vertical-align:middle;color:var(--tx);}
+#ti-wrap .ti-tbl tbody tr{transition:background 0.12s;cursor:pointer;}
+#ti-wrap .ti-tbl tbody tr:hover{background:rgba(30,41,59,0.5);}
+#ti-wrap .ti-tbl tbody tr:last-child td{border-bottom:none;}
+#ti-wrap .ti-pbar{flex:1;height:4px;background:rgba(30,41,59,0.9);border-radius:4px;overflow:hidden;min-width:60px;}
+#ti-wrap .ti-pfill{height:100%;border-radius:4px;background:linear-gradient(90deg,#6366f1,#60a5fa);}
+
+/* === STATS === */
+#ti-wrap .ti-stat-row{display:flex;gap:12px;margin-bottom:16px;}
+#ti-wrap .ti-stat-mini{flex:1;background:rgba(30,41,59,0.5);border:1px solid var(--brd);border-radius:10px;padding:12px;text-align:center;}
+#ti-wrap .ti-stat-mini-val{font-size:20px;font-weight:700;letter-spacing:-0.5px;}
+#ti-wrap .ti-stat-mini-lbl{font-size:10.5px;color:var(--mt);margin-top:3px;}
+
+/* === SKILLS === */
+#ti-wrap .ti-skill-detail{display:flex;flex-direction:column;gap:10px;}
+#ti-wrap .ti-skill-row{display:flex;align-items:center;gap:10px;}
+#ti-wrap .ti-skill-name{width:120px;font-size:12px;color:var(--mt);flex-shrink:0;}
+#ti-wrap .ti-skill-bar-w{flex:1;height:6px;background:rgba(30,41,59,0.9);border-radius:6px;overflow:hidden;}
+#ti-wrap .ti-skill-bar-f{height:100%;border-radius:6px;}
+#ti-wrap .ti-skill-pct{font-size:12px;font-weight:600;width:30px;text-align:right;flex-shrink:0;}
+
+/* === MODAL === */
+#ti-wrap .ti-modal{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;border-radius:16px;}
+#ti-wrap .ti-modal.open{display:flex;}
+#ti-wrap .ti-modal-box{background:#0f172a;border:1px solid var(--brd2);border-radius:16px;padding:24px;width:380px;max-width:90%;animation:ti-up 0.25s ease both;}
+#ti-wrap .ti-modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+#ti-wrap .ti-modal-title{font-size:16px;font-weight:700;color:var(--tx);}
+#ti-wrap .ti-close{width:30px;height:30px;border-radius:8px;background:rgba(30,41,59,0.8);border:none;color:var(--mt);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;line-height:1;}
+#ti-wrap .ti-close:hover{background:var(--card2);color:var(--tx);}
+#ti-wrap .ti-notif-list{display:flex;flex-direction:column;gap:10px;}
+#ti-wrap .ti-notif-item{background:rgba(30,41,59,0.5);border:1px solid var(--brd);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:flex-start;}
+#ti-wrap .ti-notif-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+#ti-wrap .ti-notif-txt{font-size:13px;font-weight:600;margin-bottom:3px;color:var(--tx);}
+#ti-wrap .ti-notif-sub{font-size:12px;color:var(--mt);}
+#ti-wrap .ti-notif-time{font-size:10.5px;color:var(--mt);margin-top:4px;}
+
+/* === FILTER BAR === */
+#ti-wrap .ti-filter-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+#ti-wrap .ti-fbtn{padding:6px 14px;border-radius:20px;border:1px solid var(--brd);background:transparent;color:var(--mt);font-size:12px;cursor:pointer;transition:all 0.15s;}
+#ti-wrap .ti-fbtn:hover,#ti-wrap .ti-fbtn.active{background:rgba(99,102,241,0.15);color:#818cf8;border-color:rgba(99,102,241,0.3);}
+
+/* === FORM INPUTS === */
+#ti-wrap .ti-input{width:100%;background:rgba(30,41,59,0.7);border:1px solid var(--brd2);border-radius:9px;padding:9px 12px;font-size:13px;color:var(--tx);outline:none;}
+#ti-wrap .ti-input:focus{border-color:rgba(99,102,241,0.5);}
+#ti-wrap select.ti-input option{background:#1e293b;color:var(--tx);}
+#ti-wrap .ti-field-lbl{font-size:11.5px;color:var(--mt);margin-bottom:5px;}
+
+/* === EMPTY STATE === */
+#ti-wrap .ti-empty{text-align:center;padding:40px;color:var(--mt);}
+#ti-wrap .ti-empty-ico{font-size:40px;opacity:0.3;display:block;margin-bottom:10px;}
+
+/* === SETTINGS === */
+#ti-wrap .ti-toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--brd);}
+#ti-wrap .ti-toggle-row:last-child{border-bottom:none;}
+#ti-wrap .ti-toggle-title{font-size:13.5px;font-weight:600;color:var(--tx);}
+#ti-wrap .ti-toggle-sub{font-size:11.5px;color:var(--mt);}
+#ti-wrap .ti-toggle{width:44px;height:24px;background:#6366f1;border-radius:20px;position:relative;cursor:pointer;}
+#ti-wrap .ti-toggle-knob{width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;right:3px;}
+
+/* Maturity donut center */
+#ti-wrap .ti-don-wrap{position:relative;height:160px;width:160px;flex-shrink:0;}
+#ti-wrap .ti-don-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
+#ti-wrap .ti-don-val{font-size:20px;font-weight:700;color:var(--tx);}
+#ti-wrap .ti-don-lbl{font-size:10px;color:var(--mt);}
+</style>
+
+<div class="ti-root">
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="ti-sb">
+    <div class="ti-logo">
+      <div class="ti-logo-ico">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div>
+        <div class="ti-logo-txt">Talent<span>Intel</span> AI</div>
+        <div style="font-size:10px;color:var(--mt)">v2.4 · HR Platform</div>
+      </div>
+    </div>
+    <nav class="ti-nav">
+      <div class="ti-nav-lbl">Principal</div>
+      <button class="ti-nav-item active" data-tipage="dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </button>
+      <button class="ti-nav-item" data-tipage="talents">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Talents <span class="ti-nb">247</span>
+      </button>
+      <button class="ti-nav-item" data-tipage="competences">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Compétences
+      </button>
+      <button class="ti-nav-item" data-tipage="metiers">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        Métiers
+      </button>
+      <button class="ti-nav-item" data-tipage="carto">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        Cartographie
+      </button>
+      <div class="ti-nav-lbl">Intelligence</div>
+      <button class="ti-nav-item" data-tipage="analytics">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </button>
+      <button class="ti-nav-item" data-tipage="recrutement">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        Recrutement IA <span class="ti-nb">12</span>
+      </button>
+      <div class="ti-nav-lbl">Système</div>
+      <button class="ti-nav-item" data-tipage="settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Paramètres
+      </button>
+    </nav>
+    <div class="ti-sb-foot">
+      <div class="ti-ucard">
+        <div class="ti-avat">KR</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12.5px;font-weight:600;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Karima Rouabah</div>
+          <div style="font-size:10.5px;color:var(--mt)">HR Director</div>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--mt)" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========== MAIN ========== -->
+  <main class="ti-main">
+    <header class="ti-topbar">
+      <div class="ti-srch">
+        <span class="ti-srch-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        <input type="text" class="ti-srch-in" id="ti-srch-in" placeholder="Rechercher…">
+      </div>
+      <div class="ti-tb-acts">
+        <div class="ti-ib" id="ti-notif-btn" style="position:relative">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="ti-pulse"></div>
+          <div class="ti-nb-cnt">3</div>
+        </div>
+        <div class="ti-ib">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <div class="ti-ib">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="ti-tavat">KR</div>
+      </div>
+    </header>
+
+    <div class="ti-content">
+
+      <!-- ====== PAGE: DASHBOARD ====== -->
+      <div class="ti-page active" id="ti-page-dashboard">
+        <div class="ti-pg-hdr">
+          <div>
+            <div class="ti-pg-title">Intelligence RH</div>
+            <div class="ti-pg-sub">Lun 27 Jan 2025 · Mis à jour il y a 3 min</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="font-size:11.5px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:#34d399;padding:5px 12px;border-radius:20px;font-weight:600;display:flex;align-items:center;gap:5px">
+              <span style="width:5px;height:5px;background:#10b981;border-radius:50%;animation:ti-pulse 2s infinite;display:inline-block"></span>Actif
+            </span>
+            <button class="ti-btn" id="ti-add-btn">+ Nouveau Talent</button>
+          </div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="ti-kpi-grid">
+          <div class="ti-kpi ind" data-tipage="talents">
+            <div class="ti-kpi-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="ti-kpi-val" id="ti-c-tal">0</div>
+            <div class="ti-kpi-lbl">Total Talents</div>
+            <div class="ti-kpi-tr up">↑ +12.4% ce trimestre</div>
+          </div>
+          <div class="ti-kpi blu" data-tipage="metiers">
+            <div class="ti-kpi-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+            <div class="ti-kpi-val" id="ti-c-met">0</div>
+            <div class="ti-kpi-lbl">Métiers Actifs</div>
+            <div class="ti-kpi-tr up">↑ +3 nouveaux</div>
+          </div>
+          <div class="ti-kpi grn" data-tipage="competences">
+            <div class="ti-kpi-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="ti-kpi-val" id="ti-c-cmp">0</div>
+            <div class="ti-kpi-lbl">Compétences</div>
+            <div class="ti-kpi-tr up">↑ +48 mappées</div>
+          </div>
+          <div class="ti-kpi vio" data-tipage="analytics">
+            <div class="ti-kpi-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div class="ti-kpi-val" id="ti-c-mat">0<span style="font-size:16px">%</span></div>
+            <div class="ti-kpi-lbl">Matching IA</div>
+            <div class="ti-kpi-tr up">↑ Précision +5.2%</div>
+          </div>
+          <div class="ti-kpi ros" data-tipage="recrutement">
+            <div class="ti-kpi-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div class="ti-kpi-val" id="ti-c-gap">0</div>
+            <div class="ti-kpi-lbl">Gaps Critiques</div>
+            <div class="ti-kpi-tr dn">↓ Attention requise</div>
+          </div>
+        </div>
+
+        <!-- CHARTS ROW -->
+        <div class="ti-sec2">
+          <div class="ti-card">
+            <div class="ti-card-hdr">
+              <div><div class="ti-card-title">Distribution Compétences</div><div class="ti-card-sub">Par département · T1 2025</div></div>
+              <span class="ti-bdg ind">Live</span>
+            </div>
+            <div class="ti-chart-w"><canvas id="ti-bar-c"></canvas></div>
+          </div>
+          <div class="ti-card">
+            <div class="ti-card-hdr">
+              <div><div class="ti-card-title">Maturité RH</div><div class="ti-card-sub">Score global IA</div></div>
+              <span class="ti-bdg grn">78%</span>
+            </div>
+            <div style="display:flex;gap:16px;align-items:center;height:180px">
+              <div class="ti-don-wrap">
+                <canvas id="ti-don-c"></canvas>
+                <div class="ti-don-center">
+                  <div class="ti-don-val">78%</div>
+                  <div class="ti-don-lbl">Maturité</div>
+                </div>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx)"><div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:2px;background:#6366f1"></div>Experts</div><b>34%</b></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx)"><div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:2px;background:#60a5fa"></div>Confirmés</div><b>28%</b></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx)"><div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:2px;background:#34d399"></div>Intermédiaires</div><b>22%</b></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx)"><div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:2px;background:#f59e0b"></div>Juniors</div><b>16%</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOP TALENTS -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="font-size:15px;font-weight:600;color:var(--tx)">Top Talents IA <span style="font-size:12px;font-weight:400;color:var(--mt)">· Recommandés</span></div>
+          <button class="ti-btn" style="font-size:11.5px;padding:6px 12px" data-tipage="talents">Voir tout →</button>
+        </div>
+        <div class="ti-tgrid">
+          <div class="ti-tcrd" data-talent="AR">
+            <div class="ti-tavt2" style="background:linear-gradient(135deg,#6366f1,#60a5fa)">AR</div>
+            <div class="ti-tname">Abdou Raouf</div><div class="ti-trole">AI Engineer · Alger</div>
+            <div class="ti-stags"><span class="ti-stag">Python</span><span class="ti-stag">TensorFlow</span><span class="ti-stag">MLOps</span></div>
+            <div class="ti-mrow"><span style="color:var(--mt);font-size:11px">Matching IA</span><span class="ti-mscore">94%</span></div>
+            <div class="ti-mbar"><div class="ti-mfill" data-w="94"></div></div>
+          </div>
+          <div class="ti-tcrd" data-talent="NR">
+            <div class="ti-tavt2" style="background:linear-gradient(135deg,#10b981,#34d399)">NR</div>
+            <div class="ti-tname">Nadia Rahmani</div><div class="ti-trole">Data Scientist · Oran</div>
+            <div class="ti-stags"><span class="ti-stag">R</span><span class="ti-stag">Spark</span><span class="ti-stag">Power BI</span></div>
+            <div class="ti-mrow"><span style="color:var(--mt);font-size:11px">Matching IA</span><span class="ti-mscore">89%</span></div>
+            <div class="ti-mbar"><div class="ti-mfill" data-w="89"></div></div>
+          </div>
+          <div class="ti-tcrd" data-talent="YB">
+            <div class="ti-tavt2" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">YB</div>
+            <div class="ti-tname">Yacine Benali</div><div class="ti-trole">Cloud Architect · Constantine</div>
+            <div class="ti-stags"><span class="ti-stag">AWS</span><span class="ti-stag">Kubernetes</span><span class="ti-stag">Terraform</span></div>
+            <div class="ti-mrow"><span style="color:var(--mt);font-size:11px">Matching IA</span><span class="ti-mscore">87%</span></div>
+            <div class="ti-mbar"><div class="ti-mfill" data-w="87"></div></div>
+          </div>
+          <div class="ti-tcrd" data-talent="LH">
+            <div class="ti-tavt2" style="background:linear-gradient(135deg,#f43f5e,#fb7185)">LH</div>
+            <div class="ti-tname">Lina Haddad</div><div class="ti-trole">Cyber Security · Sétif</div>
+            <div class="ti-stags"><span class="ti-stag">SIEM</span><span class="ti-stag">PenTest</span><span class="ti-stag">SOC</span></div>
+            <div class="ti-mrow"><span style="color:var(--mt);font-size:11px">Matching IA</span><span class="ti-mscore">91%</span></div>
+            <div class="ti-mbar"><div class="ti-mfill" data-w="91"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== PAGE: TALENTS ====== -->
+      <div class="ti-page" id="ti-page-talents">
+        <div class="ti-pg-hdr">
+          <div><div class="ti-pg-title">Talents</div><div class="ti-pg-sub">247 talents · Filtrez et explorez</div></div>
+          <button class="ti-btn">+ Ajouter</button>
+        </div>
+        <div class="ti-filter-bar" id="ti-talent-filters">
+          <button class="ti-fbtn active" data-filter="all">Tous (247)</button>
+          <button class="ti-fbtn" data-filter="ai">IA &amp; Data</button>
+          <button class="ti-fbtn" data-filter="cloud">Cloud</button>
+          <button class="ti-fbtn" data-filter="cyber">Cyber</button>
+          <button class="ti-fbtn" data-filter="rh">RH</button>
+        </div>
+        <div class="ti-card">
+          <div class="ti-twrap">
+            <table class="ti-tbl">
+              <thead><tr><th>Talent</th><th>Poste</th><th>Ville</th><th>Score IA</th><th>Statut</th><th>Action</th></tr></thead>
+              <tbody id="ti-talents-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== PAGE: COMPETENCES ====== -->
+      <div class="ti-page" id="ti-page-competences">
+        <div class="ti-pg-hdr">
+          <div><div class="ti-pg-title">Compétences</div><div class="ti-pg-sub">512 compétences mappées</div></div>
+          <button class="ti-btn">+ Nouvelle compétence</button>
+        </div>
+        <div class="ti-stat-row">
+          <div class="ti-stat-mini"><div class="ti-stat-mini-val" style="color:#818cf8">512</div><div class="ti-stat-mini-lbl">Compétences totales</div></div>
+          <div class="ti-stat-mini"><div class="ti-stat-mini-val" style="color:#34d399">89%</div><div class="ti-stat-mini-lbl">Taux de couverture</div></div>
+          <div class="ti-stat-mini"><div class="ti-stat-mini-val" style="color:#fbbf24">14</div><div class="ti-stat-mini-lbl">Gaps critiques</div></div>
+          <div class="ti-stat-mini"><div class="ti-stat-mini-val" style="color:#60a5fa">38</div><div class="ti-stat-mini-lbl">Métiers couverts</div></div>
+        </div>
+        <div class="ti-card">
+          <div class="ti-card-hdr"><div><div class="ti-card-title">Top compétences par maîtrise</div><div class="ti-card-sub">Score moyen équipe</div></div><span class="ti-bdg ind">IA Analyse</span></div>
+          <div class="ti-skill-detail">
+            <div class="ti-skill-row"><div class="ti-skill-name">Machine Learning</div><div class="ti-skill-bar-w"><div class="ti-skill-bar-f" style="width:84%;background:#6366f1"></div></div><div class="ti-skill-pct" style="color:#818cf8">84%</div></div>
+            <div class="ti-skill-row"><div class="ti-skill-name">Python</div><div class="ti-skill-bar-w"><div class="ti-skill-bar-f" style="width:92%;background:#6366f1"></div></div><div class="ti-skill-pct" style="color:#818cf8">92%</div></div>
+            <div class="ti-skill-row"><div class="ti-skill-name">AWS / Cloud</div><div class="ti-skill-bar-w"><div class="ti-skill-bar-f" style="width:71%;background:#60a5fa"></div></div><div class="ti-skill-pct" style="color:#60a5fa">71%</div></div>
+            <div class="ti-skill-row"><div class="ti-skill-name">Data Engineering</div><div class="ti-skill-bar-w"><div class="ti-skill-bar-f" style="width:67%;background:#60a5fa"></div></div><div class="ti-skill-pct" style="color:#60a5fa">67%</div></div>
+            <div class="ti-skill-row"><div class="ti-skill-name">Cyber Security</div><div class="ti-skill-bar-w"><div class="ti-skill-bar-f" style="width:58%;background:#f43f5e"></div></div><div class="ti-skill-pct" style="color:#f43f5e">58%</div></div>
+            <div class="ti-skill-row"><div class="ti-skill-name">DevOps / CI-CD</div><div class="ti-skill-bar-w"><div class="ti-skill-bar-f" style="width:63%;background:#f59e0b"></div></div><div class="ti-skill-pct" style="color:#fbbf24">63%</div></div>
+            <div class="ti-skill-row"><div class="ti-skill-name">Kubernetes</div><div class="ti-skill-bar-w"><div class="ti-skill-bar-f" style="width:45%;background:#f43f5e"></div></div><div class="ti-skill-pct" style="color:#f43f5e">45%</div></div>
+            <div class="ti-skill-row"><div class="ti-skill-name">NLP / LLM</div><div class="ti-skill-bar-w"><div class="ti-skill-bar-f" style="width:52%;background:#8b5cf6"></div></div><div class="ti-skill-pct" style="color:#a78bfa">52%</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== PAGE: RECRUTEMENT ====== -->
+      <div class="ti-page" id="ti-page-recrutement">
+        <div class="ti-pg-hdr">
+          <div><div class="ti-pg-title">Recrutement IA</div><div class="ti-pg-sub">12 postes actifs · 5 critiques</div></div>
+          <div style="display:flex;gap:8px"><span class="ti-bdg ros">5 Critiques</span><span class="ti-bdg amb">4 Urgents</span></div>
+        </div>
+        <div class="ti-card">
+          <div class="ti-card-hdr"><div><div class="ti-card-title">Tableau des postes à pourvoir</div><div class="ti-card-sub">Suivi en temps réel · Q1 2025</div></div></div>
+          <div class="ti-twrap">
+            <table class="ti-tbl">
+              <thead><tr><th>Poste</th><th>Département</th><th>Criticité</th><th>Statut</th><th>Progression</th></tr></thead>
+              <tbody>
+                <tr><td><div style="font-weight:600">ML Engineer Senior</div><div style="font-size:10.5px;color:var(--mt)">Référent: Amine Khelifi</div></td><td><span class="ti-bdg ind">IA &amp; Data</span></td><td><span class="ti-bdg ros">🔴 Critique</span></td><td><span class="ti-bdg amb">En Sourcing</span></td><td><div style="display:flex;align-items:center;gap:8px"><div class="ti-pbar"><div class="ti-pfill" style="width:65%"></div></div><span style="font-size:11px;color:var(--mt)">65%</span></div></td></tr>
+                <tr><td><div style="font-weight:600">Product Manager IA</div><div style="font-size:10.5px;color:var(--mt)">Référent: Sarah Bensalem</div></td><td><span class="ti-bdg vio">Produit</span></td><td><span class="ti-bdg ros">🔴 Critique</span></td><td><span class="ti-bdg blu">Entretiens</span></td><td><div style="display:flex;align-items:center;gap:8px"><div class="ti-pbar"><div class="ti-pfill" style="width:80%"></div></div><span style="font-size:11px;color:var(--mt)">80%</span></div></td></tr>
+                <tr><td><div style="font-weight:600">DevOps Engineer</div><div style="font-size:10.5px;color:var(--mt)">Référent: Ilyes Touati</div></td><td><span class="ti-bdg grn">Infrastructure</span></td><td><span class="ti-bdg amb">🟡 Urgent</span></td><td><span class="ti-bdg grn">Offre envoyée</span></td><td><div style="display:flex;align-items:center;gap:8px"><div class="ti-pbar"><div class="ti-pfill" style="width:92%"></div></div><span style="font-size:11px;color:var(--mt)">92%</span></div></td></tr>
+                <tr><td><div style="font-weight:600">HR Analyst</div><div style="font-size:10.5px;color:var(--mt)">Référent: Rayane Meziane</div></td><td><span class="ti-bdg blu">Ressources Humaines</span></td><td><span class="ti-bdg blu">🔵 Modérée</span></td><td><span class="ti-bdg ind">CV Review</span></td><td><div style="display:flex;align-items:center;gap:8px"><div class="ti-pbar"><div class="ti-pfill" style="width:35%"></div></div><span style="font-size:11px;color:var(--mt)">35%</span></div></td></tr>
+                <tr><td><div style="font-weight:600">Data Scientist Lead</div><div style="font-size:10.5px;color:var(--mt)">Référent: Nadia Rahmani</div></td><td><span class="ti-bdg ind">IA &amp; Data</span></td><td><span class="ti-bdg ros">🔴 Critique</span></td><td><span class="ti-bdg amb">En Sourcing</span></td><td><div style="display:flex;align-items:center;gap:8px"><div class="ti-pbar"><div class="ti-pfill" style="width:48%"></div></div><span style="font-size:11px;color:var(--mt)">48%</span></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== PAGE: ANALYTICS ====== -->
+      <div class="ti-page" id="ti-page-analytics">
+        <div class="ti-pg-hdr"><div><div class="ti-pg-title">Analytics RH</div><div class="ti-pg-sub">Tableaux de bord avancés</div></div><span class="ti-bdg vio">IA Powered</span></div>
+        <div class="ti-stat-row">
+          <div class="ti-stat-mini"><div class="ti-stat-mini-val" style="color:#818cf8">92%</div><div class="ti-stat-mini-lbl">Taux de rétention</div></div>
+          <div class="ti-stat-mini"><div class="ti-stat-mini-val" style="color:#34d399">18j</div><div class="ti-stat-mini-lbl">Délai moyen recrutement</div></div>
+          <div class="ti-stat-mini"><div class="ti-stat-mini-val" style="color:#60a5fa">4.8</div><div class="ti-stat-mini-lbl">Score satisfaction</div></div>
+          <div class="ti-stat-mini"><div class="ti-stat-mini-val" style="color:#fbbf24">€34k</div><div class="ti-stat-mini-lbl">Coût moyen par recrue</div></div>
+        </div>
+        <div class="ti-sec2">
+          <div class="ti-card">
+            <div class="ti-card-hdr"><div><div class="ti-card-title">Évolution des talents</div><div class="ti-card-sub">6 derniers mois</div></div></div>
+            <div class="ti-chart-w"><canvas id="ti-line-c"></canvas></div>
+          </div>
+          <div class="ti-card">
+            <div class="ti-card-hdr"><div><div class="ti-card-title">Répartition par tranche d'âge</div><div class="ti-card-sub">Analyse démographique</div></div></div>
+            <div class="ti-chart-w"><canvas id="ti-age-c"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== PAGE: METIERS ====== -->
+      <div class="ti-page" id="ti-page-metiers">
+        <div class="ti-pg-hdr"><div><div class="ti-pg-title">Métiers</div><div class="ti-pg-sub">38 métiers actifs</div></div><button class="ti-btn">+ Nouveau métier</button></div>
+        <div class="ti-empty"><span class="ti-empty-ico">💼</span><div style="font-size:16px;font-weight:600;margin-bottom:8px;color:var(--tx)">Cartographie des Métiers</div><div style="font-size:13px">Accédez à la carte interactive complète</div><button class="ti-btn" style="margin-top:16px">Voir la cartographie IA</button></div>
+      </div>
+
+      <!-- ====== PAGE: CARTO ====== -->
+      <div class="ti-page" id="ti-page-carto">
+        <div class="ti-pg-hdr"><div><div class="ti-pg-title">Cartographie</div><div class="ti-pg-sub">Vue globale des compétences</div></div></div>
+        <div class="ti-empty"><span class="ti-empty-ico">🗺️</span><div style="font-size:16px;font-weight:600;margin-bottom:8px;color:var(--tx)">Carte Interactive des Compétences</div><div style="font-size:13px">Visualisation 3D en cours de chargement…</div></div>
+      </div>
+
+      <!-- ====== PAGE: SETTINGS ====== -->
+      <div class="ti-page" id="ti-page-settings">
+        <div class="ti-pg-hdr"><div><div class="ti-pg-title">Paramètres</div><div class="ti-pg-sub">Configuration de la plateforme</div></div></div>
+        <div class="ti-card">
+          <div class="ti-toggle-row"><div><div class="ti-toggle-title">Mode sombre</div><div class="ti-toggle-sub">Interface dark activée</div></div><div class="ti-toggle"><div class="ti-toggle-knob"></div></div></div>
+          <div class="ti-toggle-row"><div><div class="ti-toggle-title">Notifications IA</div><div class="ti-toggle-sub">Alertes automatiques</div></div><div class="ti-toggle"><div class="ti-toggle-knob"></div></div></div>
+          <div class="ti-toggle-row"><div><div class="ti-toggle-title">API TalentIntel v2</div><div class="ti-toggle-sub">Connexion active · Latence 42ms</div></div><span class="ti-bdg grn">Connecté</span></div>
+        </div>
+      </div>
+
+    </div><!-- end ti-content -->
+  </main>
+
+  <!-- ====== MODAL: TALENT DETAIL ====== -->
+  <div class="ti-modal" id="ti-modal-talent">
+    <div class="ti-modal-box">
+      <div class="ti-modal-hdr">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div id="ti-m-avat" style="width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff"></div>
+          <div><div class="ti-modal-title" id="ti-m-name"></div><div style="font-size:12px;color:var(--mt)" id="ti-m-role"></div></div>
+        </div>
+        <button class="ti-close" id="ti-close-talent">✕</button>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:11px;color:var(--mt);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.8px;font-weight:600">Compétences</div>
+        <div id="ti-m-skills" class="ti-stags"></div>
+      </div>
+      <div style="background:rgba(30,41,59,0.5);border-radius:10px;padding:14px;margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:12px;color:var(--mt)">Score Matching IA</span>
+          <span id="ti-m-score" style="font-size:18px;font-weight:700;color:#34d399"></span>
+        </div>
+        <div class="ti-mbar"><div id="ti-m-bar" class="ti-mfill"></div></div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="ti-btn" style="flex:1">Voir profil complet</button>
+        <button class="ti-btn-ghost" style="flex:1">Contacter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== MODAL: NOTIFICATIONS ====== -->
+  <div class="ti-modal" id="ti-modal-notif">
+    <div class="ti-modal-box" style="width:360px">
+      <div class="ti-modal-hdr">
+        <div class="ti-modal-title">Notifications</div>
+        <button class="ti-close" id="ti-close-notif">✕</button>
+      </div>
+      <div class="ti-notif-list">
+        <div class="ti-notif-item"><div class="ti-notif-dot" style="background:#f43f5e"></div><div><div class="ti-notif-txt">Gap critique détecté</div><div class="ti-notif-sub">Poste ML Engineer Senior sans candidat qualifié</div><div class="ti-notif-time">Il y a 5 min</div></div></div>
+        <div class="ti-notif-item"><div class="ti-notif-dot" style="background:#10b981"></div><div><div class="ti-notif-txt">Nouveau match IA</div><div class="ti-notif-sub">Abdou Raouf : 94% compatibilité détectée</div><div class="ti-notif-time">Il y a 23 min</div></div></div>
+        <div class="ti-notif-item"><div class="ti-notif-dot" style="background:#f59e0b"></div><div><div class="ti-notif-txt">Offre acceptée</div><div class="ti-notif-sub">Ilyes Touati a accepté l'offre DevOps</div><div class="ti-notif-time">Il y a 1h</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== MODAL: ADD TALENT ====== -->
+  <div class="ti-modal" id="ti-modal-add">
+    <div class="ti-modal-box">
+      <div class="ti-modal-hdr"><div class="ti-modal-title">Nouveau Talent</div><button class="ti-close" id="ti-close-add">✕</button></div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div><div class="ti-field-lbl">Nom complet</div><input type="text" class="ti-input" placeholder="Ex: Amine Khelifi"></div>
+        <div><div class="ti-field-lbl">Poste</div><input type="text" class="ti-input" placeholder="Ex: ML Engineer"></div>
+        <div><div class="ti-field-lbl">Département</div>
+          <select class="ti-input">
+            <option>IA &amp; Data</option><option>Cloud &amp; Infrastructure</option><option>Cyber Security</option><option>Ressources Humaines</option><option>Produit</option>
+          </select>
+        </div>
+        <button class="ti-btn" id="ti-close-add2" style="margin-top:4px;padding:10px">Ajouter le talent →</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end ti-root -->
+</div><!-- end ti-wrap -->
+
+<!-- Chart.js chargé après le DOM, avec vérification -->
+<script>
+(function(){
+  // Attendre que le DOM soit prêt
+  function tiInit() {
+
+    // ---- DONNÉES ----
+    var tiTalents = [
+      {init:'AR',name:'Abdou Raouf',role:'AI Engineer',ville:'Alger',score:94,dept:'ai',status:'Actif',color:'linear-gradient(135deg,#6366f1,#60a5fa)',skills:['Python','TensorFlow','MLOps','NLP']},
+      {init:'NR',name:'Nadia Rahmani',role:'Data Scientist',ville:'Oran',score:89,dept:'ai',status:'Actif',color:'linear-gradient(135deg,#10b981,#34d399)',skills:['R','Spark','Power BI','SQL']},
+      {init:'YB',name:'Yacine Benali',role:'Cloud Architect',ville:'Constantine',score:87,dept:'cloud',status:'Actif',color:'linear-gradient(135deg,#f59e0b,#fbbf24)',skills:['AWS','Kubernetes','Terraform']},
+      {init:'LH',name:'Lina Haddad',role:'Cyber Security Expert',ville:'Sétif',score:91,dept:'cyber',status:'Actif',color:'linear-gradient(135deg,#f43f5e,#fb7185)',skills:['SIEM','PenTest','SOC']},
+      {init:'AK',name:'Amine Khelifi',role:'ML Engineer',ville:'Alger',score:85,dept:'ai',status:'Actif',color:'linear-gradient(135deg,#8b5cf6,#a78bfa)',skills:['PyTorch','Scikit','FastAPI']},
+      {init:'SB',name:'Sarah Bensalem',role:'Product Manager IA',ville:'Alger',score:82,dept:'ai',status:'Mission',color:'linear-gradient(135deg,#6366f1,#f43f5e)',skills:['Roadmap','OKR','Agile']},
+      {init:'IT',name:'Ilyes Touati',role:'DevOps Engineer',ville:'Alger',score:88,dept:'cloud',status:'Offre',color:'linear-gradient(135deg,#3b82f6,#10b981)',skills:['Docker','CI/CD','Linux']},
+      {init:'RM',name:'Rayane Meziane',role:'HR Analyst',ville:'Annaba',score:76,dept:'rh',status:'Actif',color:'linear-gradient(135deg,#f59e0b,#f43f5e)',skills:['SIRH','Analytics','Excel']},
+    ];
+    var tiTalentMap = {};
+    tiTalents.forEach(function(t){ tiTalentMap[t.init] = t; });
+
+    var tiCharts = {};
+    var tiCurrentFilter = 'all';
+
+    // ---- NAVIGATION ----
+    function tiNavigate(page) {
+      var root = document.querySelector('#ti-wrap .ti-root');
+      if(!root) return;
+      root.querySelectorAll('.ti-nav-item').forEach(function(el){ el.classList.remove('active'); });
+      var ni = root.querySelector('[data-tipage="'+page+'"]');
+      if(ni) ni.classList.add('active');
+      root.querySelectorAll('.ti-page').forEach(function(p){ p.classList.remove('active'); });
+      var pg = document.getElementById('ti-page-'+page);
+      if(pg) pg.classList.add('active');
+      if(page === 'analytics') setTimeout(tiInitAnalytics, 80);
+      if(page === 'talents') tiRenderTalents(tiCurrentFilter);
+    }
+
+    // Nav items
+    document.querySelectorAll('#ti-wrap .ti-nav-item').forEach(function(el){
+      el.addEventListener('click', function(e){
+        e.preventDefault();
+        tiNavigate(this.dataset.tipage);
+      });
+    });
+
+    // KPI cards
+    document.querySelectorAll('#ti-wrap .ti-kpi[data-tipage]').forEach(function(el){
+      el.addEventListener('click', function(){ tiNavigate(this.dataset.tipage); });
+    });
+
+    // "Voir tout" button
+    var vBtn = document.querySelector('#ti-wrap [data-tipage="talents"].ti-btn');
+    if(vBtn) vBtn.addEventListener('click', function(){ tiNavigate('talents'); });
+
+    // ---- MODALS ----
+    function tiOpenModal(id){ var m=document.getElementById(id); if(m) m.classList.add('open'); }
+    function tiCloseModal(id){ var m=document.getElementById(id); if(m) m.classList.remove('open'); }
+
+    document.querySelectorAll('#ti-wrap .ti-modal').forEach(function(m){
+      m.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
+    });
+
+    var addBtn = document.getElementById('ti-add-btn');
+    if(addBtn) addBtn.addEventListener('click', function(){ tiOpenModal('ti-modal-add'); });
+
+    var notifBtn = document.getElementById('ti-notif-btn');
+    if(notifBtn) notifBtn.addEventListener('click', function(){ tiOpenModal('ti-modal-notif'); });
+
+    ['ti-close-talent','ti-close-notif','ti-close-add','ti-close-add2'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.addEventListener('click', function(){
+        var modal = this.closest('.ti-modal');
+        if(modal) modal.classList.remove('open');
+      });
+    });
+
+    // ---- TALENT DETAIL MODAL ----
+    function tiOpenTalent(init) {
+      var t = tiTalentMap[init];
+      if(!t) return;
+      document.getElementById('ti-m-avat').style.background = t.color;
+      document.getElementById('ti-m-avat').textContent = t.init;
+      document.getElementById('ti-m-name').textContent = t.name;
+      document.getElementById('ti-m-role').textContent = t.role + ' · ' + t.ville;
+      document.getElementById('ti-m-score').textContent = t.score + '%';
+      var bar = document.getElementById('ti-m-bar');
+      bar.style.width = '0';
+      setTimeout(function(){ bar.style.width = t.score + '%'; }, 50);
+      var sc = document.getElementById('ti-m-skills');
+      sc.innerHTML = t.skills.map(function(s){ return '<span class="ti-stag">'+s+'</span>'; }).join('');
+      tiOpenModal('ti-modal-talent');
+    }
+
+    // Talent cards on dashboard
+    document.querySelectorAll('#ti-wrap .ti-tcrd[data-talent]').forEach(function(el){
+      el.addEventListener('click', function(){ tiOpenTalent(this.dataset.talent); });
+    });
+
+    // ---- RENDER TALENTS TABLE ----
+    function tiRenderTalents(filter) {
+      tiCurrentFilter = filter;
+      var q = (document.getElementById('ti-srch-in').value||'').toLowerCase();
+      var filtered = tiTalents.filter(function(t){
+        return (filter==='all' || t.dept===filter) &&
+               (!q || (t.name+t.role+t.ville).toLowerCase().indexOf(q) > -1);
+      });
+      var body = document.getElementById('ti-talents-body');
+      if(!body) return;
+      if(!filtered.length){
+        body.innerHTML = '<tr><td colspan="6"><div class="ti-empty">Aucun résultat</div></td></tr>';
+        return;
+      }
+      body.innerHTML = filtered.map(function(t){
+        var sc = t.score>=90?'#34d399':t.score>=80?'#fbbf24':'#f43f5e';
+        var stClass = t.status==='Actif'?'grn':t.status==='Offre'?'amb':'blu';
+        return '<tr data-tinit="'+t.init+'">'
+          +'<td><div style="display:flex;align-items:center;gap:10px">'
+          +'<div style="width:30px;height:30px;border-radius:50%;background:'+t.color+';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">'+t.init+'</div>'
+          +'<span style="font-weight:600;font-size:13px">'+t.name+'</span></div></td>'
+          +'<td style="font-size:12.5px">'+t.role+'</td>'
+          +'<td style="font-size:12.5px;color:var(--mt)">'+t.ville+'</td>'
+          +'<td><span style="font-size:13px;font-weight:700;color:'+sc+'">'+t.score+'%</span></td>'
+          +'<td><span class="ti-bdg '+stClass+'">'+t.status+'</span></td>'
+          +'<td><button style="background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.25);color:#818cf8;padding:4px 10px;border-radius:7px;font-size:11px;cursor:pointer">Profil</button></td>'
+          +'</tr>';
+      }).join('');
+      body.querySelectorAll('tr[data-tinit]').forEach(function(tr){
+        tr.addEventListener('click', function(){ tiOpenTalent(this.dataset.tinit); });
+      });
+    }
+
+    // Filter buttons
+    document.querySelectorAll('#ti-talent-filters .ti-fbtn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('#ti-talent-filters .ti-fbtn').forEach(function(b){ b.classList.remove('active'); });
+        this.classList.add('active');
+        tiRenderTalents(this.dataset.filter);
+      });
+    });
+
+    // Search
+    var srchIn = document.getElementById('ti-srch-in');
+    if(srchIn) srchIn.addEventListener('input', function(){
+      if(document.getElementById('ti-page-talents').classList.contains('active'))
+        tiRenderTalents(tiCurrentFilter);
+    });
+
+    // ---- COUNTER ANIMATION ----
+    function tiAnimCount(el, target, dur) {
+      var start = 0, step = Math.max(1, Math.ceil(target/(dur/16)));
+      var timer = setInterval(function(){
+        start += step;
+        if(start >= target){ start = target; clearInterval(timer); }
+        el.innerHTML = start + (el.dataset.suffix||'');
+      }, 16);
+    }
+
+    var cTal = document.getElementById('ti-c-tal');
+    var cMet = document.getElementById('ti-c-met');
+    var cCmp = document.getElementById('ti-c-cmp');
+    var cMat = document.getElementById('ti-c-mat');
+    var cGap = document.getElementById('ti-c-gap');
+    if(cTal) tiAnimCount(cTal, 247, 1000);
+    if(cMet) tiAnimCount(cMet, 38, 700);
+    if(cCmp) tiAnimCount(cCmp, 512, 1200);
+    if(cGap) tiAnimCount(cGap, 14, 600);
+    // Matching % with suffix
+    if(cMat){
+      var m=0, mStep=1, mTimer=setInterval(function(){
+        m+=mStep; if(m>=87){m=87;clearInterval(mTimer);}
+        cMat.innerHTML=m+'<span style="font-size:16px">%</span>';
+      },16);
+    }
+
+    // Animate match bars
+    setTimeout(function(){
+      document.querySelectorAll('#ti-wrap .ti-mfill[data-w]').forEach(function(el){
+        el.style.width = '0';
+        setTimeout(function(){ el.style.width = el.dataset.w + '%'; }, 80);
+      });
+    }, 400);
+
+    // ---- CHARTS (only if Chart.js available) ----
+    function tiMkChart(id, type, data, options) {
+      if(tiCharts[id]) return;
+      var el = document.getElementById(id);
+      if(!el || typeof Chart === 'undefined') return;
+      var base = {
+        responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e293b',titleColor:'#f8fafc',bodyColor:'#94a3b8',borderColor:'#334155',borderWidth:1,padding:10,cornerRadius:8}}
+      };
+      var opts = Object.assign({}, base, options||{});
+      tiCharts[id] = new Chart(el, {type:type, data:data, options:opts});
+    }
+
+    function tiInitDashboardCharts() {
+      tiMkChart('ti-bar-c','bar',{
+        labels:['Tech IA','Data','Cloud','Cyber','RH','Produit'],
+        datasets:[
+          {label:'Maîtrisées',data:[84,72,65,58,45,78],backgroundColor:'rgba(99,102,241,0.7)',borderRadius:6,borderSkipped:false},
+          {label:'Requises',data:[100,90,85,80,70,95],backgroundColor:'rgba(99,102,241,0.12)',borderRadius:6,borderSkipped:false}
+        ]
+      },{scales:{x:{grid:{color:'rgba(30,41,59,0.8)'},ticks:{color:'#94a3b8',font:{size:10}}},y:{grid:{color:'rgba(30,41,59,0.8)'},ticks:{color:'#94a3b8',font:{size:10}},max:115}}});
+
+      tiMkChart('ti-don-c','doughnut',{
+        labels:['Experts','Confirmés','Intermédiaires','Juniors'],
+        datasets:[{data:[34,28,22,16],backgroundColor:['#6366f1','#60a5fa','#34d399','#f59e0b'],borderWidth:0,hoverOffset:4}]
+      },{cutout:'70%'});
+    }
+
+    function tiInitAnalytics() {
+      tiMkChart('ti-line-c','line',{
+        labels:['Août','Sep','Oct','Nov','Déc','Jan'],
+        datasets:[
+          {label:'Recrutements',data:[12,19,15,24,18,28],borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,0.1)',tension:0.4,fill:true,pointBackgroundColor:'#6366f1',pointRadius:4},
+          {label:'Départs',data:[3,5,2,4,3,2],borderColor:'#f43f5e',backgroundColor:'rgba(244,63,94,0.08)',tension:0.4,fill:true,pointBackgroundColor:'#f43f5e',pointRadius:4}
+        ]
+      },{scales:{x:{grid:{color:'rgba(30,41,59,0.8)'},ticks:{color:'#94a3b8',font:{size:10}}},y:{grid:{color:'rgba(30,41,59,0.8)'},ticks:{color:'#94a3b8',font:{size:10}}}}});
+
+      tiMkChart('ti-age-c','bar',{
+        labels:['20-25','26-30','31-35','36-40','41-45','45+'],
+        datasets:[{label:'Talents',data:[28,67,54,42,31,25],backgroundColor:['#6366f1','#818cf8','#60a5fa','#34d399','#f59e0b','#f43f5e'],borderRadius:6,borderSkipped:false}]
+      },{scales:{x:{grid:{color:'rgba(30,41,59,0.8)'},ticks:{color:'#94a3b8',font:{size:10}}},y:{grid:{color:'rgba(30,41,59,0.8)'},ticks:{color:'#94a3b8',font:{size:10}}}}});
+    }
+
+    // Load Chart.js then init
+    if(typeof Chart !== 'undefined'){
+      setTimeout(tiInitDashboardCharts, 200);
+    } else {
+      var sc = document.createElement('script');
+      sc.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+      sc.onload = function(){ setTimeout(tiInitDashboardCharts, 100); };
+      document.head.appendChild(sc);
+    }
+
+  } // end tiInit
+
+  // Lance quand le DOM est prêt
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', tiInit);
+  } else {
+    tiInit();
+  }
+
+})();
+</script>
